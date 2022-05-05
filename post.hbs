@@ -1,0 +1,74 @@
+{{!< default}} {{#post}} <main id="gh-main" class="gh-main">
+    <article class="gh-article {{post_class}}">
+        <header class="gh-article-header gh-canvas">
+            {{#is "post"}}
+            <span class="gh-article-meta">
+                {{#primary_author}}Oleh <a href="{{url}}">{{name}}</a>{{/primary_author}}
+                —
+                <time datetime="{{date format=" YYYY-MM-DD"}}">{{date}}</time>
+            </span>
+            {{/is}}
+            <span class="gh-article-meta">
+                {{#if tags}}
+                {{#foreach tags autolink="true"}}
+                <a class="gh-card-tags" title="{{name}}" href="{{url}}">{{name}}</a>
+                {{/foreach}}
+                {{/if}}
+            </span>
+            <h1 class="gh-article-title">{{title}}</h1>
+
+            {{#if custom_excerpt}}
+            <p class="gh-article-excerpt">{{custom_excerpt}}</p>
+            {{/if}}
+
+            {{#if feature_image}}
+            <figure class="gh-article-image">
+                <img srcset="{{img_url feature_image size=" s"}} 300w, {{img_url feature_image size="m" }} 720w,
+                    {{img_url feature_image size="l" }} 960w, {{img_url feature_image size="xl" }} 1200w, {{img_url
+                    feature_image size="xxl" }} 2000w" sizes="(max-width: 1200px) 100vw, 1200px"
+                    src="{{img_url feature_image size=" xl"}}"
+                    alt="{{#if feature_image_alt}}{{feature_image_alt}}{{else}}{{title}}{{/if}}">
+                {{#if feature_image_caption}}
+                <figcaption>{{feature_image_caption}}</figcaption>
+                {{/if}}
+            </figure>
+            {{/if}}
+        </header>
+        <div class="gh-content gh-canvas">
+            {{content}}
+            <div class="giscus"></div>
+            <script src="https://giscus.app/client.js" data-repo="adityawarmanfw/adityawarmanfw.id"
+                data-repo-id="R_kgDOHE0wRw" data-category="Announcements" data-category-id="DIC_kwDOHE0wR84COTCo"
+                data-mapping="pathname" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top"
+                data-theme="light" data-lang="id" data-loading="lazy" crossorigin="anonymous" async>
+            </script>
+        </div>
+        {{#is "post"}}
+        <footer class="gh-article-footer gh-canvas">
+            <nav class="gh-navigation">
+                <div class="gh-navigation-previous">
+                    {{#prev_post}}
+                    <a class="gh-navigation-link" href="{{url}}">
+                        <span class="gh-navigation-label">{{> icons/arrow-left}} Sebelumnya</span>
+                        <h4 class="gh-navigation-title">{{title}}</h4>
+                    </a>
+                    {{/prev_post}}
+                </div>
+
+                <div class="gh-navigation-middle"></div>
+
+                <div class="gh-navigation-next">
+                    {{#next_post}}
+                    <a class="gh-navigation-link" href="{{url}}">
+                        <span class="gh-navigation-label">Selanjutnya {{> icons/arrow-right}}</span>
+                        <h4 class="gh-navigation-title">{{title}}</h4>
+                    </a>
+                    {{/next_post}}
+                </div>
+            </nav>
+        </footer>
+        {{/is}}
+    </article>
+    </main>
+
+    {{/post}}

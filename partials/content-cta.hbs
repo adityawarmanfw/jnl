@@ -1,0 +1,22 @@
+{{{html}}}
+
+<section class="gh-cta">
+    {{#has visibility="paid"}}
+        <h4 class="gh-cta-title">Halaman ini hanya bisa diakses pelanggan berbayar.</h4>
+    {{/has}}
+    {{#has visibility="members"}}
+        <h4 class="gh-cta-title">Halaman ini hanya bisa diakses pelanggan</h4>
+    {{/has}}
+    {{#has visibility="filter"}}
+        <h4 class="gh-cta-title">Halaman ini hanya bisa diakses pelanggan {{products}} saja</h4>
+    {{/has}}
+
+    <div class="gh-cta-actions">
+        {{#if @member}}
+            <button class="gh-btn gh-primary-btn" href="#/portal/account/plans" data-portal="account/plans">Ubah langganan</button>
+        {{else}}
+            <button class="gh-btn gh-primary-btn" href="#/portal/signup" data-portal="signup">Langganan sekarang</button>
+            <span class="gh-cta-link" href="#/portal/signin" data-portal="signin">Sudah punya akun? Silakan masuk.</span>
+        {{/if}}
+    </div>
+</section>

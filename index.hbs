@@ -1,0 +1,100 @@
+{{!< default}} <main id="gh-main" class="gh-main gh-outer">
+    <div class="gh-inner">
+        <div class="gh-welcome">
+            {{#if @custom.welcome_header_text}}<h2>{{@custom.welcome_header_text}}</h2>{{/if}}
+            {{#if @custom.welcome_text}}<span>{{@custom.welcome_text}}</span>{{/if}}
+            <script async src="https://cse.google.com/cse.js?cx=30a7db86664ba5cd8"></script>
+            <div class="gcse-search"></div>
+        </div>
+
+        <div class="gh-wrapper">
+
+            <section class="gh-section">
+                <h2 class="gh-section-title">Artikel</h2>
+
+                <div class="gh-feed">
+                    {{#foreach posts from="1"}}
+                    {{> loop}}
+                    {{/foreach}}
+                </div>
+
+                {{#match posts.length "=" 1}}
+                Akan segera diterbitkan.
+                {{/match}}
+
+                <button class="gh-loadmore gh-btn">Tampilkan lebih banyak</button>
+            </section>
+
+            <aside class="gh-sidebar">
+                <section class="gh-section">
+                    <h2 class="gh-section-title">Tentang</h2>
+
+                    <div class="gh-about">
+                        {{#if @site.icon}}
+                        <img class="gh-about-icon" width="64px" height="64px" src="{{@site.icon}}" alt="{{@site.title}}">
+                        {{/if}}
+
+                        <section class="gh-about-wrapper">
+                            <h3 class="gh-about-title">{{@site.title}}</h3>
+
+                            {{#if @site.description}}
+                            <p class="gh-about-description">{{@site.description}}</p>
+                            {{/if}}
+                        </section>
+                    </div>
+
+                    {{^if @member.paid}}
+                    <div class="gh-signup">
+                        {{^if @member}}
+                        <p class="gh-signup-description">Daftarkan email untuk berlangganan nawala</p>
+
+                        <a class="gh-subscribe-input" href="#/portal/signup" data-portal="signup">
+                            <div class="gh-subscribe-input-text">
+                                {{> icons/email}}
+                                gmail@domain.com
+                            </div>
+                            <div class="gh-subscribe-input-btn">Langganan</div>
+                        </a>
+                        {{else}}
+                        {{!-- <p class="gh-signup-description">Ubah ke akun berbayar untuk mendapat akses penuh</p>
+                        <a class="gh-signup-btn gh-btn gh-primary-btn" href="#/portal/account/plans"
+                            data-portal="account/plans">Ubah langganan</a> --}}
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                </section>
+
+                {{#get "posts" filter="featured:true" limit="all" as |featured|}}
+                {{#if featured}}
+                <section class="gh-section">
+                    <h3 class="gh-section-title">Pilihan</h3>
+
+                    <div class="gh-featured gh-feed">
+                        {{#foreach featured}}
+                        {{> loop}}
+                        {{/foreach}}
+                    </div>
+                </section>
+                {{/if}}
+                {{/get}}
+
+                {{#get "tags" include="count.posts" limit="all" as |topic|}}
+                <section class="gh-section">
+                    <h3 class="gh-section-title">Koleksi</h3>
+
+                    <div class="gh-topic">
+                        {{#foreach topic}}
+                        <a class="gh-topic-item" href="{{url}}">
+                            <h3 class="gh-topic-name">{{name}}</h3>
+                            <span class="gh-topic-count">
+                                {{plural count.posts empty="0" singular="%" plural="%"}}
+                            </span>
+                        </a>
+                        {{/foreach}}
+                    </div>
+                </section>
+                {{/get}}
+            </aside>
+        </div>
+    </div>
+    </main>
